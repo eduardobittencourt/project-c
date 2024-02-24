@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1708806975816,
+      "tag": "0000_condemned_havok",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1708807811513,
+      "tag": "0001_strange_true_believers",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1708808059845,
+      "tag": "0002_bored_rocket_racer",
+      "breakpoints": true
+    }
+  ]
+}
