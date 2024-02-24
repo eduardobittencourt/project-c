@@ -13,7 +13,7 @@ type RootLayoutProps = Readonly<{
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="pt-br">
-      <body>{children}</body>
+      <body className="container mx-auto">{children}</body>
     </html>
   );
 }
