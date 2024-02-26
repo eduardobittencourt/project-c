@@ -1,9 +1,11 @@
 import { auth } from "@/auth";
+import getUserGroups from "@/services/getUserGroups";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function Home() {
   const session = await auth();
+  const userGroups = await getUserGroups();
 
   return (
     <main>
@@ -27,6 +29,20 @@ export default async function Home() {
           <Link href="/api/auth/signin">Signin</Link>
         </div>
       )}
+
+      <div>
+        <h1>Selecione o grupo</h1>
+
+        <ul>
+          {userGroups.map((userGroup) => (
+            <li key={userGroup.group.id}>
+              <Link href={`/${userGroup.group.id}`}>
+                {userGroup.group.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </main>
   );
 }

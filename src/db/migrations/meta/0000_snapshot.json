@@ -1,5 +1,5 @@
 {
-  "id": "ec059225-2e97-4aa6-a1be-efc9a3ecf760",
+  "id": "e7131591-418b-48d4-990b-009f557dcc05",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -102,6 +102,29 @@
       },
       "uniqueConstraints": {}
     },
+    "group": {
+      "name": "group",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "session": {
       "name": "session",
       "schema": "",
@@ -148,12 +171,11 @@
       "name": "user_group",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
+        "group_id": {
+          "name": "group_id",
           "type": "uuid",
           "primaryKey": false,
-          "notNull": false,
-          "default": "gen_random_uuid()"
+          "notNull": true
         },
         "user_id": {
           "name": "user_id",
@@ -164,6 +186,19 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "user_group_group_id_group_id_fk": {
+          "name": "user_group_group_id_group_id_fk",
+          "tableFrom": "user_group",
+          "tableTo": "group",
+          "columnsFrom": [
+            "group_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
         "user_group_user_id_user_id_fk": {
           "name": "user_group_user_id_user_id_fk",
           "tableFrom": "user_group",
@@ -179,23 +214,15 @@
         }
       },
       "compositePrimaryKeys": {
-        "user_group_id_user_id_pk": {
-          "name": "user_group_id_user_id_pk",
+        "user_group_group_id_user_id_pk": {
+          "name": "user_group_group_id_user_id_pk",
           "columns": [
-            "id",
+            "group_id",
             "user_id"
           ]
         }
       },
-      "uniqueConstraints": {
-        "user_group_user_id_unique": {
-          "name": "user_group_user_id_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "user_id"
-          ]
-        }
-      }
+      "uniqueConstraints": {}
     },
     "user": {
       "name": "user",
